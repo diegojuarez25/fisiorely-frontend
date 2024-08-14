@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <!-- Logo -->
+      <img src="assets/PRIMUM.png" alt="Primum Wellness Center" class="logo">
+  
+      <!-- Botón de iniciar sesión con ícono de usuario -->
+      <button class="login-button" (click)="redirectToLogin()">
+        <mat-icon class="login-icon">account_circle</mat-icon>
+        <span class="login-text">Ingresar</span>
+      </button>
+    </header>
+<!-- Texto de Bienvenida con Animación -->
+<div class="welcome-text">
+  <div class="sliding-container">
+    <h1 class="sliding-text">
+      Bienvenidos a Primum Wellness Center&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bienvenidos a Primum Wellness Center&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bienvenidos a Primum Wellness Center&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bienvenidos a Primum Wellness Center
+    </h1>
+  </div>
+  <div class="underline"></div>
+</div>
+
+
+    
+    <!-- Aquí continúa el contenido de tu página -->
+  </div>
+  
+  <main>
+    <h1 class="cool-title">En PRIMUM WELLNESS CENTER contamos con:</h1>
+    <div class="ofrecemos-container">
+      <div class="ofrecemos">
+        <div class="ofrecemos-item">
+          <img src="../../../assets/imagen103.jpg" alt="Ofrecemos 1">
+          <p>Consulta Psicologica</p>
+        </div>
+        <div class="ofrecemos-item">
+          <img src="../../../assets/imagen104.jpg" alt="Ofrecemos 2">
+          <p>Consulta Medica</p>
+        </div>
+        <div class="ofrecemos-item">
+          <img src="../../../assets/imagen103.jpg" alt="Ofrecemos 3">
+          <p>Consulta Psicologica</p>
+        </div>
+        <div class="ofrecemos-item">
+          <img src="../../../assets/imagen104.jpg" alt="Ofrecemos 4">
+          <p>Consulta Medica</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <section class="about-us">
+    <div class="about-us-container">
+      <img src="../../../assets/quienes somos.jpg" alt="Fisioterapeuta con paciente" class="about-us-image">
+      <div class="about-us-text">
+        <h2 class="who-we-are-title">¿Quiénes somos?</h2>
+        <hr class="about-us-divider"> 
+        <p>En Primum Wellness Center, ofrecemos una amplia gama de servicios de salud integral. Nuestros especialistas en fisioterapia y rehabilitación utilizan técnicas avanzadas en neurología, deportes, geriatría, ortopedia y pediatría para mejorar tu funcionalidad física y calidad de vida. También proporcionamos apoyo psicológico para manejar el estrés y mejorar tu bienestar emocional. Además, nuestros médicos generales están disponibles para brindarte atención médica completa y personalizada. Estamos comprometidos a ayudarte a alcanzar una vida más saludable y satisfactoria.</p>
+      </div>
+    </div>
+  </section>
+  
+  <div class="separacion"></div>
+  
+  <section class="services-section">
+    <div class="section-title-container">
+      <h2 class="section-title">SERVICIOS</h2>
+      <div class="section-title-underline"></div>
+    </div>
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="carousel-image-wrapper">
+            <img src="../../../assets/Imagenpaciente.jpg" class="d-block w-100" alt="Imagen 1">
+            <div class="carousel-caption d-none d-md-block">
+              <p>Descripción de Imagen 1</p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-image-wrapper">
+            <img src="../../../assets/Hola.jpg" class="d-block w-100" alt="Imagen 2">
+            <div class="carousel-caption d-none d-md-block">
+              <p>Descripción de Imagen 2</p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-image-wrapper">
+            <img src="../../../assets/LLAMDA1.jpg" class="d-block w-100" alt="Imagen 3">
+            <div class="carousel-caption d-none d-md-block">
+              <p>Descripción de Imagen 3</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+      </a>
+    </div>
+  </section>
+  
+  
+  <div class="separacion" style="margin: 20px 0;"></div>
+  
+  <section class="therapy-sessions-section">
+    <div class="section-title-container">
+      <h2 class="section-title">SESIONES DE FISIOTERAPIA</h2>
+      <p>Imágenes de primum wellness centerdh en acción</p>
+    </div>
+    <div class="album-container">
+      <div class="album-item">
+        <img src="../../../assets/Imagen1.jpg" alt="Imagen 1">
+      </div>
+      <div class="album-item">
+        <img src="../../../assets/Imagen2.jpg" alt="Imagen 2">
+      </div>
+      <div class="album-item">
+        <img src="../../../assets/Imagen7.jpg" alt="Imagen 3">
+      </div>
+      <div class="album-item">
+        <img src="../../../assets/Imagen4.jpg" alt="Imagen 4">
+      </div>
+      <div class="album-item">
+        <img src="../../../assets/Imagen5.jpg" alt="Imagen 5">
+      </div>
+      <div class="album-item">
+        <img src="../../../assets/Imagen8.jpg" alt="Imagen 5">
+      </div>
+      <!-- Agrega más divs .album-item según sea necesario -->
+    </div>
+  </section>
+  
+  <div class="separacion" style="margin: 20px 0;"></div>
+
+<!--TITULOS Y ACREDITACIONES-->
+
+<div class="container">
+  <section class="acreditaciones-container">
+    <h2 class="section-title">
+      <i class="bi bi-trophy-fill"></i> Logros y Acreditaciones
+    </h2>
+    
+    <div class="separacion" style="margin: 6px 0;"></div>
+
+    <div class="acreditaciones">
+      <div class="acreditacion-item">
+        <h3 class="titulo">II Jornadas de “Actualización en Fisioterapia”</h3>
+      </div>
+      <div class="acreditacion-item">
+        <h3 class="titulo">Curso-Taller de “Prevención y Manejo Inicial de Problemas Ortopédicos en el Niño”</h3>
+      </div>
+      <div class="acreditacion-item">
+        <h3 class="titulo">VIIII Congreso de Fisioterapia</h3>
+      </div>
+      <div class="acreditacion-item">
+        <h3 class="titulo">Curso-Taller “Actualización de uso de medios físicos en fisioterapia”</h3>
+      </div>
+      <div class="acreditacion-item">
+        <h3 class="titulo">III Jornadas de “Actualización en Fisioterapia”</h3>
+      </div>
+      <div class="acreditacion-item">
+        <h3 class="titulo">Certificación en “Curso básico Vendaje Neuro Muscular”</h3>
+      </div>
+      <div class="acreditacion-item">
+        <h3 class="titulo">Primera Sesión Académica con el tema “Terapia Manual Lumbar”</h3>
+      </div>
+      <div class="acreditacion-item">
+        <h3 class="titulo">Certificación en “Terapia Manual Instrumentalizada Richelli’s”</h3>
+      </div>
+      <div class="acreditacion-item">
+        <h3 class="titulo">Certificación de “Punción Seca Neurofuncional y Electroanalgesia Percutánea”</h3>
+      </div>
+      <div class="acreditacion-item">
+        <h3 class="titulo">Certificación de Electrolipolisis Dermatofuncional</h3>
+      </div>
+      <div class="acreditacion-item">
+        <h3 class="titulo">Workshop especial “Runners”</h3>
+      </div>
+      <div class="acreditacion-item">
+        <h3 class="titulo">Diplomado en Terapia Neural</h3>
+      </div>
+      <div class="acreditacion-item">
+        <h3 class="titulo">Certificación en “Rehabilitación Funcional y Ejercicio Terapéutico”</h3>
+      </div>
+      <div class="acreditacion-item">
+        <h3 class="titulo">Certificación “DOSAGE Terapéutico N1 Fundamentals”</h3>
+      </div>
+      <div class="acreditacion-item">
+        <h3 class="titulo">Reconocimiento por ponencia en taller denominado “Anatomía Palpatoria”</h3>
+      </div>
+      <div class="acreditacion-item">
+        <h3 class="titulo">Certificación “Herramientas de Valoración en Fisioterapia Pediátrica y Neonatal”</h3>
+      </div>
+    </div>
+  </section>
+</div>
+<!--AQUI TERMINA TITULOS Y ACREDITACIONES-->
+
+
+  <div class="contact-find-us-container">
+    <img src="../../../assets/Almarely Camacho.png" alt="Primum Wellness Center" class="logo">
+    <div class="additional-info">
+      <p><i class="fas fa-map-marker-alt icon"></i>Emilio Portes Gil #3-A, Col. Lindavista</p>
+      <p><i class="fas fa-phone icon"></i> Teléfono: +52 418 101 1462</p>
+      <p><i class="fas fa-envelope icon"></i> Email: info primumwellnesscenter.com</p>
+    </div>
+    <div class="find-us">
+      <h3></h3>
+      <!-- Mini mapa con la dirección -->
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d930.2431431482546!2d-100.9470674053363!3d21.15348977134435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842b3fbab305ed05%3A0x8ea05ec5d00e79ad!2sEmilio%20Portes%20Gil%203!5e0!3m2!1ses-419!2smx!4v1717911458398!5m2!1ses-419!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+  
+  <div class="services-about-hours">
+    <div class="services">
+      <h3>Servicios de PRIMUM WELLNESS CENTER</h3>
+      <ul>
+        <li>Fisioterapia Neurológica</li>
+        <li>Fisioterapia Ortopédica</li>
+        <li>Fisioterapia Geriátrica</li>
+        <li>Fisioterapia Deportiva</li>
+        <li>Fisioterapia pediatrica</li>
+      </ul>
+    </div>
+    <div class="about">
+      <h3>Sobre PRIMUM WELLNESS CENTER</h3>
+      <p>PRIMUM WELLNESS CENTER es una Clínica de Fisioterapia y Rehabilitación Física en Dolores Hidalgo, México</p>
+    </div>
+    <div class="hours">
+      <h3>Horarios de PRIMUM WELLNESS CENTER</h3>
+      <ul>
+        <li>Lunes: 09:00AM – 07:00PM</li>
+        <li>Martes: 09:00AM – 07:00PM</li>
+        <li>Miércoles: 09:00AM – 07:00PM</li>
+        <li>Jueves: 09:00AM – 07:00PM</li>
+        <li>Viernes: 09:00AM – 07:00PM</li>
+        <li>Sábado: 10:00AM – 02:00PM</li>
+      </ul>
+    </div>
+  </div>
+  
+  <footer>
+    <!-- Otro contenido del footer aquí -->
+  
+    <!-- Información de contacto -->
+    <div class="contact-info">
+  
+    </div>
+  
+    <!-- Íconos de redes sociales -->
+    <div class="social-media-icons">
+      <a href="https://www.instagram.com/primum_wellnesscenterdh/" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.facebook.com/primumfisioterapialeon" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://api.whatsapp.com/send?phone=NUMERO_DE_TU_TELEFONO" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    </div>
+  </footer>
+</body>
+</html>

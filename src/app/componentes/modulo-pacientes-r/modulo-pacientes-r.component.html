@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo de Pacientes</title>
+</head>
+<body>
+  <div>
+    <app-navigation-bar-recepsionista></app-navigation-bar-recepsionista>
+  </div>
+
+  <div class="container mt-5 login-container">
+    <h1 class="text-center mb-4 title-text">Pacientes</h1>
+    <form [formGroup]="pacienteForm" (ngSubmit)="guardarPaciente()" class="mb-4 login-form">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <mat-form-field appearance="fill" class="w-100 form-field">
+            <mat-label>Nombre</mat-label>
+            <input matInput id="nombre" formControlName="nombre" type="text">
+          </mat-form-field>
+        </div>
+        <div class="col-md-6 mb-3">
+          <mat-form-field appearance="fill" class="w-100 form-field">
+            <mat-label>Apellido Paterno</mat-label>
+            <input matInput id="apellido_paterno" formControlName="apellido_paterno" type="text">
+          </mat-form-field>
+        </div>
+        <div class="col-md-6 mb-3">
+          <mat-form-field appearance="fill" class="w-100 form-field">
+            <mat-label>Apellido Materno</mat-label>
+            <input matInput id="apellido_materno" formControlName="apellido_materno" type="text">
+          </mat-form-field>
+        </div>
+        <div class="col-md-6 mb-3">
+          <mat-form-field appearance="fill" class="w-100 form-field">
+            <mat-label>Teléfono</mat-label>
+            <input matInput id="telefono" formControlName="telefono" type="text">
+          </mat-form-field>
+        </div>
+        <div class="col-md-6 mb-3">
+          <mat-form-field appearance="fill" class="w-100 form-field">
+            <mat-label>Edad</mat-label>
+            <input matInput id="edad" formControlName="edad" type="number">
+          </mat-form-field>
+        </div>
+        <div class="col-md-6 mb-3">
+          <mat-form-field appearance="fill" class="w-100 form-field">
+            <mat-label>Estado</mat-label>
+            <mat-select formControlName="estado">
+              <mat-option value="En tratamiento">En tratamiento</mat-option>
+              <mat-option value="Dado de alta">Dado de alta</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <button mat-raised-button type="submit" class="mr-2 button-line">
+            {{ pacienteSeleccionado ? 'Actualizar' : 'Agregar' }}
+          </button>
+          <button mat-raised-button type="button" (click)="resetearFormulario()" class="button-line">Cancelar</button>
+        </div>
+      </div>
+    </form>
+
+    <hr class="separator-line">
+
+    <div class="title-bar">Pacientes Disponibles</div>
+
+    <hr class="separator-line">
+
+    <mat-form-field appearance="fill" class="w-100 form-field">
+      <mat-label>Buscar por nombre</mat-label>
+      <input matInput (input)="aplicarFiltro($event)" placeholder="Nombre">
+    </mat-form-field>
+    
+    
+    <mat-paginator [length]="filteredPacientes.length"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[6, 12, 18]"
+    (page)="onPageChange($event)">
+</mat-paginator>
+
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-12 mb-3" *ngFor="let paciente of pacientes">
+        <mat-card [ngClass]="{'bg-red': paciente.estado === 'Dado de alta'}" class="user-card">
+          <mat-card-content>
+            <div class="user-info">
+              <mat-icon>person</mat-icon>
+              <span class="name">{{ paciente.nombre }} {{ paciente.apellido_paterno }} {{ paciente.apellido_materno }}</span>
+            </div>
+            <div class="user-info">
+              <mat-icon>phone</mat-icon>
+              <span class="info"><strong>Teléfono:</strong> {{ paciente.telefono }}</span>
+            </div>
+            <div class="user-info">
+              <mat-icon>calendar_today</mat-icon>
+              <span class="info"><strong>Edad:</strong> {{ paciente.edad }}</span>
+            </div>
+            <div class="user-info">
+              <mat-icon>healing</mat-icon>
+              <span class="info"><strong>Estado:</strong> {{ paciente.estado }}</span>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button color="primary" (click)="actualizarPaciente(paciente)">
+              <mat-icon>edit</mat-icon>
+              Actualizar
+            </button>
+            <button mat-button color="warn" (click)="eliminarPaciente(paciente.id)">
+              <mat-icon>delete</mat-icon>
+              Eliminar
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+    <footer class="footer"></footer>
+  </div>
+</body>
+</html>

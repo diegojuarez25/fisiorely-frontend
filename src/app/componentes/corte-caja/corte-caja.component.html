@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="corte-caja.component.css">
+  <title>Corte de Caja</title>
+</head>
+<body>
+  <div>
+    <!-- Componente de navegación específico para administradores -->
+    <app-navigation-bar-administrador></app-navigation-bar-administrador>
+  </div>
+  
+  <div class="corte-caja-container mt-5">
+    <h2 class="corte-caja-title">Agregar Corte de Caja</h2>
+    <form [formGroup]="formularioCorte" (ngSubmit)="realizarCorteCaja()">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="fechaInicio">Fecha de Inicio</label>
+            <p-calendar formControlName="fechaInicio" [showIcon]="true" [showTime]="true" class="corte-caja-field"></p-calendar>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="fechaFin">Fecha de Fin</label>
+            <p-calendar formControlName="fechaFin" [showIcon]="true" [showTime]="true" class="corte-caja-field"></p-calendar>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="usuarioId">Usuario</label>
+        <select class="form-control corte-caja-field" id="usuarioId" formControlName="usuarioId">
+          <option *ngFor="let usuario of usuarios" [ngValue]="usuario.id">{{ usuario.nombre }} {{ usuario.apellido_paterno }} {{ usuario.apellido_materno }}</option>
+        </select>
+      </div>
+      <button type="submit" class="corte-caja-button" [disabled]="botonAgregarCorteDesactivado">Agregar Corte de Caja</button>
+    </form>
+    
+    <div class="corte-caja-separator"></div>
+    
+    <h2 class="corte-caja-title">Listado de Cortes de Caja</h2>
+    <div class="row">
+      <div class="col-md-6 mb-4" *ngFor="let corte of cortesCaja">
+        <div class="corte-caja-card">
+          <div class="corte-caja-user-info">
+            <i class="fas fa-wallet"></i>
+            <div class="name">Corte de caja {{ corte.fecha_inicio | date}} - {{ corte.fecha_fin | date }}</div>
+          </div>
+          <div class="corte-caja-separator"></div>
+          <div class="row">
+            <div class="col-sm-6">
+              <p class="card-text"><i class="far fa-calendar-alt"></i> <strong>Fecha de Inicio:</strong> {{ corte.fecha_inicio | date:'short' }}</p>
+              <p class="card-text"><i class="far fa-calendar-alt"></i> <strong>Fecha de Fin:</strong> {{ corte.fecha_fin | date:'short' }}</p>
+              <p class="card-text"><i class="fas fa-dollar-sign"></i> <strong>Total Ingresos:</strong> {{ corte.total_ingresos | currency }}</p>
+            </div>
+            <div class="col-sm-6">
+              <p class="card-text"><i class="fas fa-hand-holding-usd"></i> <strong>Total Gastos:</strong> {{ corte.total_gastos | currency }}</p>
+              <div class="button-container">
+                <!-- Botón Eliminar -->
+                <button class="corte-caja-button-eliminar btn btn-sm" (click)="eliminarCorteCaja(corte.id)">
+                <mat-icon>delete</mat-icon> Eliminar
+                </button>
+                <div class="separacion" style="margin: 4px 0;"></div>
+
+                <!-- Botón Detalles Ingresos -->
+                <button class="corte-caja-button-detalles-ingresos btn btn-sm" (click)="mostrarDetalles(corte)">
+                <i class="fas fa-info-circle"></i> Detalles Ingresos
+                </button>
+                <div class="separacion" style="margin: 4px 0;"></div>
+
+                <!-- Botón Detalles Gastos -->
+                <button class="corte-caja-button-detalles-gastos btn btn-sm" (click)="mostrarDetallesGastos(corte)">
+                <i class="fas fa-money-bill"></i> Detalles Gastos
+                </button>
+
+              </div>
+            </div>
+          </div>
+          <div *ngIf="corteMostrado && corteMostrado.id === corte.id && tipoDetalle === 'ingresos'" class="corte-caja-highlight">
+            <h5>Detalles del Corte de Caja (Ingresos)</h5>
+            <p><strong>Efectivo:</strong> {{ corte.efectivo | currency }}</p>
+            <p><strong>Transferencia:</strong> {{ corte.transferencia | currency }}</p>
+            <p><strong>Tarjeta:</strong> {{ corte.tarjeta | currency }}</p>
+            <button class="corte-caja-button btn btn-secondary btn-sm mt-2" (click)="cerrarDetalles()">Cerrar</button>
+          </div>
+          <div *ngIf="corteMostrado && corteMostrado.id === corte.id && tipoDetalle === 'gastos'" class="corte-caja-highlight">
+            <h5>Detalles del Corte de Caja (Gastos)</h5>
+            <p><strong>Efectivo:</strong> {{ corte.efectivo_gastos | currency }}</p>
+            <p><strong>Transferencia:</strong> {{ corte.transferencia_gastos | currency }}</p>
+            <p><strong>Tarjeta:</strong> {{ corte.tarjeta_gastos | currency }}</p>
+            <button class="corte-caja-button btn btn-secondary btn-sm mt-2" (click)="cerrarDetalles()">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="corte-caja-footer">© 2024 Primum Wellness Center</footer>
+</body>
+</html>

@@ -1,0 +1,55 @@
+/* Estilo para el contenedor del calendario */
+.calendar-container {
+  margin: 20px auto; /* Centra el contenedor y agrega un margen vertical */
+  max-width: 1000px; /* Ancho máximo del contenedor */
+  background-color: #ffffff; /* Color de fondo blanco */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra alrededor del contenedor */
+  padding: 80px; /* Espaciado interno */
+}
+
+/* Estilo para eventos */
+.fc-event {
+  background-color: #3d8ddd; /* Color de fondo del evento */
+  color: #fff; /* Color del texto */
+  border: none; /* Sin borde */
+}
+
+/* Estilo para el tooltip del evento */
+.event-tooltip {
+  position: absolute; /* Posición absoluta para colocarlo cerca del evento */
+  z-index: 10001; /* Asegura que el tooltip esté por encima de otros elementos */
+  background: #3788d8; /* Color de fondo del tooltip */
+  color: #fff; /* Color del texto */
+  padding: 10px; /* Espaciado interno */
+  border-radius: 4px; /* Bordes redondeados */
+  white-space: pre-wrap; /* Permite saltos de línea en el texto */
+  display: none; /* Inicialmente oculto */
+}
+
+/* Estilos para las indicaciones */
+.indicaciones {
+  margin-top: 20px; /* Margen superior */
+  padding: 20px; /* Espaciado interno */
+  background-color: #f8f8f8; /* Color de fondo gris claro */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra alrededor del contenedor */
+}
+
+.indicaciones h3 {
+  margin-bottom: 10px; /* Margen inferior */
+}
+
+.indicaciones p {
+  margin: 5px 0; /* Márgenes verticales */
+}
+
+/* Estilo para el pie de página */
+.footer {
+  background-color: #fdfcfe; /* Color de fondo del pie de página */
+  height: 50px; /* Altura del pie de página */
+  width: 100%; /* Ancho completo */
+  position: fixed; /* Posición fija en la parte inferior de la ventana */
+  bottom: 0; /* Alinea al fondo */
+  left: 0; /* Alinea a la izquierda */
+}

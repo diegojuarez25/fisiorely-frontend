@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <app-navigation-bar-administrador></app-navigation-bar-administrador>
+  </div>
+  <div class="container mt-5">
+    <div class="title-container">
+      <h1 class="title-text">Usuarios</h1>
+    </div>
+    <form [formGroup]="userForm" (ngSubmit)="saveUser()" class="mb-4">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <mat-form-field appearance="fill" class="w-100 form-field">
+            <mat-label>Nombre</mat-label>
+            <input matInput id="nombre" formControlName="nombre" type="text">
+          </mat-form-field>
+        </div>
+        <div class="col-md-6 mb-3">
+          <mat-form-field appearance="fill" class="w-100 form-field">
+            <mat-label>Apellido Paterno</mat-label>
+            <input matInput id="apellido_paterno" formControlName="apellido_paterno" type="text">
+          </mat-form-field>
+        </div>
+        <div class="col-md-6 mb-3">
+          <mat-form-field appearance="fill" class="w-100 form-field">
+            <mat-label>Apellido Materno</mat-label>
+            <input matInput id="apellido_materno" formControlName="apellido_materno" type="text">
+          </mat-form-field>
+        </div>
+        <div class="col-md-6 mb-3">
+          <mat-form-field appearance="fill" class="w-100 form-field">
+            <mat-label>Correo electrónico</mat-label>
+            <input matInput id="email" formControlName="email" type="email">
+          </mat-form-field>
+        </div>
+        <div class="col-md-6 mb-3" *ngIf="!editingUserId">
+          <mat-form-field appearance="fill" class="w-100 form-field">
+            <mat-label>Contraseña</mat-label>
+            <input matInput id="password" formControlName="password" [type]="hidePassword ? 'password' : 'text'"
+                   (input)="onPasswordInput()">
+            <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" [attr.aria-label]="'Toggle password visibility'">
+              <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+          </mat-form-field>
+          <div class="progress mt-2">
+            <div class="progress-bar" [ngClass]="passwordStrengthClass" role="progressbar" [style.width]="passwordStrength + '%'">
+              {{ passwordStrengthText }}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <mat-form-field appearance="fill" class="w-100 form-field">
+            <mat-label>Rol</mat-label>
+            <mat-select id="rol_id" formControlName="rol_id">
+              <mat-option *ngFor="let rol of roles" [value]="rol.id">{{ rol.nombre }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <button mat-raised-button type="submit" class="mr-2 button-line">{{ editingUserId ? 'Actualizar' : 'Agregar' }}</button>
+          <button mat-button type="button" (click)="resetForm()" class="button-line">Cancelar</button>
+        </div>
+      </div>
+    </form>
+
+    <hr class="separator-line">
+    
+    <div class="title-bar">Usuarios Creados</div>
+
+    <hr class="separator-line">
+
+    <mat-form-field appearance="fill" class="search-field">
+      <mat-label>Buscar por nombre los usuarios</mat-label>
+      <input matInput (input)="applyFilter($event)" class="input-highlight">
+    </mat-form-field>
+    
+    <mat-paginator #paginator
+      [length]="filteredUsers.length"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[6, 12, 18]"
+      (page)="onPageChange($event)">
+    </mat-paginator>
+    
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-12 mb-3" *ngFor="let user of paginatedUsers">
+        <mat-card class="user-card">
+          <mat-card-content>
+            <div class="user-info">
+              <mat-icon>person</mat-icon>
+              <span class="name">{{ user.nombre }} {{ user.apellido_paterno }} {{ user.apellido_materno }}</span>
+            </div>
+            <div class="user-info">
+              <mat-icon>email</mat-icon>
+              <span class="info"><strong>Email:</strong> {{ user.email }}</span>
+            </div>
+            <div class="user-info">
+              <mat-icon>group</mat-icon>
+              <span class="info"><strong>Rol:</strong> {{ user.rol_id === 1 ? 'Administrador' : 'Recepcionista' }}</span>
+            </div>
+            <div class="user-info">
+              <mat-icon>calendar_today</mat-icon>
+              <span class="info"><strong>Fecha de creación:</strong> {{ user.fecha_creacion | date }}</span>
+            </div>
+            <div *ngIf="user.fecha_actualizacion" class="user-info">
+              <mat-icon>update</mat-icon>
+              <span class="info"><strong>Fecha de actualización:</strong> {{ user.fecha_actualizacion | date }}</span>
+            </div>
+          </mat-card-content>
+          <mat-card-actions class="user-actions">
+            <button mat-button color="primary" (click)="editUser(user)">
+              <mat-icon>edit</mat-icon>
+              Editar
+            </button>
+            <button mat-button color="warn" (click)="deleteUser(user.id)">
+              <mat-icon>delete</mat-icon>
+              Eliminar
+            </button>
+            <button mat-button color="accent" (click)="openPasswordDialog(user)">
+              <mat-icon>vpn_key</mat-icon>
+              Actualizar Contraseña
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+    <footer class="footer"></footer>
+
+  </div>
+</body>
+</html>

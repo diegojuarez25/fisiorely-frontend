@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulo Gastos</title>
+  <link rel="stylesheet" href="modulo-gastos.component.css">
+</head>
+<body>
+<div>
+  <app-navigation-bar-administrador></app-navigation-bar-administrador>
+</div>
+<div class="container mt-5">
+  <h1 class="text-center mb-4 title-text">Gastos</h1>
+  <form [formGroup]="gastoForm" (ngSubmit)="agregarOActualizarGasto()" class="mb-4">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <mat-form-field appearance="fill" class="w-100 form-field">
+          <mat-label>Concepto</mat-label>
+          <input matInput formControlName="concepto" required>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6 mb-3">
+        <mat-form-field appearance="fill" class="w-100 form-field">
+          <mat-label>Monto</mat-label>
+          <input matInput formControlName="monto" type="number" required>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6 mb-3">
+        <mat-form-field appearance="fill" class="w-100 form-field">
+          <mat-label>Forma de Pago</mat-label>
+          <mat-select formControlName="forma_pago_id">
+            <mat-option *ngFor="let forma of formasPago" [value]="forma.id">{{ forma.descripcion }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="form-group">
+          <label for="fecha">Fecha y hora</label>
+          <p-calendar formControlName="fecha" [showIcon]="true" [showTime]="true" class="custom-calendar-icon"></p-calendar>
+        </div>
+      </div>      
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <button mat-raised-button  type="submit" class="mr-2 button-line">{{ editMode ? 'Actualizar' : 'Agregar' }}</button>
+        <button mat-raised-button  type="submit"  class="mr-2 button-line" (click)="resetForm()">Cancelar</button>
+      </div>
+    </div>
+  </form>
+
+  <hr class="separator-line">
+
+  <div class="title-bar">Gastos Registrados</div>
+
+  <hr class="separator-line">
+
+  <mat-form-field appearance="fill" class="search-field">
+    <mat-label>Buscar por Concepto</mat-label>
+    <input matInput (input)="applyFilter($event)" class="input-highlight">
+  </mat-form-field>
+
+  <mat-paginator
+  #paginator
+  [length]="gastos.length"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[6, 12, 18]"
+  (page)="onPageChange($event)">
+</mat-paginator>
+
+  <div class="row">
+    <div class="col-lg-4 col-md-6 col-12 mb-3" *ngFor="let gasto of filteredGastos">
+      <mat-card class="user-card">
+        <mat-card-content>
+          <div class="user-info">
+            <mat-icon>description</mat-icon>
+            <span class="info"><strong>Concepto:</strong> {{ gasto.concepto }}</span>
+          </div>
+          <div class="user-info">
+            <mat-icon>attach_money</mat-icon>
+            <span class="info"><strong>Monto:</strong> {{ gasto.monto }}</span>
+          </div>
+          <div class="user-info">
+            <mat-icon>payment</mat-icon>
+            <span class="info"><strong>Forma de Pago:</strong> {{ gasto.forma_pago.descripcion }}</span>
+          </div>
+          <div class="user-info">
+            <mat-icon>event</mat-icon>
+            <span class="info"><strong>Fecha:</strong> {{ gasto.fecha | date:'short' }}</span>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="editarGasto(gasto)">
+            <mat-icon>edit</mat-icon>
+            Editar
+          </button>
+          <button mat-button color="warn" (click)="confirmarEliminacion(gasto.id)">
+            <mat-icon>delete</mat-icon>
+            Eliminar
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <footer class="footer">
+    </footer>
+  </div>
+</div>
+</body>
+</html>

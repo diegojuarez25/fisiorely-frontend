@@ -1,0 +1,49 @@
+<h1 mat-dialog-title>Nuevo Paciente</h1>
+<div mat-dialog-content>
+  <form [formGroup]="pacienteForm" (ngSubmit)="guardarPaciente()">
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" type="text" required>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Apellido Paterno</mat-label>
+        <input matInput formControlName="apellidoPaterno" type="text" required>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Apellido Materno</mat-label>
+        <input matInput formControlName="apellido_materno" type="text">
+      </mat-form-field>
+    </div>
+    
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Teléfono</mat-label>
+        <input matInput formControlName="telefono" type="text">
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Edad</mat-label>
+        <input matInput formControlName="edad" type="number">
+      </mat-form-field>
+    </div>
+    <div class="col-md-6 mb-3">
+      <mat-form-field appearance="fill" class="w-100 form-field">
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="estado">
+          <mat-option value="En tratamiento">En tratamiento</mat-option>
+          <mat-option value="Dado de alta">Dado de alta</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClose()">Cancelar</button>
+  <button mat-button color="primary" [disabled]="!pacienteForm.valid" (click)="guardarPaciente()">Guardar</button>
+</div>

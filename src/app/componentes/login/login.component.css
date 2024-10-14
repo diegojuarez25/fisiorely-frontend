@@ -1,0 +1,75 @@
+/* Contenedor principal del login, centrado en pantalla */
+.login-container {
+  display: flex; /* Flexbox para centrar contenido */
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  height: 100vh; /* Altura completa de la ventana */
+  background-image: url('https://teamsep.com/wp-content/uploads/fisioterapeuta-en-terapia.jpeg'); /* Imagen de fondo */
+  background-size: cover; /* Cubrir todo el contenedor */
+  background-position: center; /* Centrar la imagen de fondo */
+}
+
+/* Contenedor del formulario de login */
+.login-form {
+  max-width: 380px; /* Máximo ancho del formulario */
+}
+
+/* Estilo del formulario de login */
+.login-form {
+  background-color: rgba(255, 255, 255, 0.6); /* Fondo semi-transparente */
+  padding: 20px; /* Espaciado interno */
+  border-radius: 8px; /* Esquinas redondeadas */
+  width: 100%; /* Ancho completo */
+  max-width: 400px; /* Ancho máximo */
+  box-shadow: 0 3px 10px rgba(42, 197, 184, 0.5); /* Sombra del formulario */
+  text-align: center; /* Texto centrado */
+}
+
+/* Estilo del logo */
+.logo {
+  width: 350px; /* Ancho del logo */
+  margin-bottom: 0px; /* Margen inferior del logo */
+}
+
+/* Estilo del título en la tarjeta de Material */
+mat-card-title {
+  margin-bottom: 0px; /* Margen inferior del título */
+  font-size: 24px; /* Tamaño de fuente del título */
+  font-weight: bold; /* Negrita */
+  color: #00bed1; /* Color del título */
+}
+
+/* Estilo del subtítulo en la tarjeta de Material */
+mat-card-subtitle {
+  margin-bottom: 10px; /* Margen inferior del subtítulo */
+  font-size: 14px; /* Tamaño de fuente del subtítulo */
+  color: #777; /* Color del subtítulo */
+}
+
+/* Estilo de los campos de formulario de Material */
+mat-form-field {
+  width: 100%; /* Ancho completo */
+  margin-bottom: 20px; /* Margen inferior */
+}
+
+/* Color de los iconos en los campos de formulario */
+.input-icon {
+  color: #323232; /* Color de los iconos */
+}
+
+/* Estilo específico para los iconos de login */
+mat-icon.login-icon {
+  margin-right: 8px; /* Margen derecho del icono */
+  font-size: 20px; /* Tamaño de fuente del icono */
+}
+
+/* Estilo para los campos de formulario */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #00bed1; /* Color del borde del campo */
+  border-width: 2px; /* Grosor del borde */
+}
+
+.mat-form-field-label {
+  color: #00bed1; /* Color de la etiqueta */
+  font-weight: bold; /* Negrita para la etiqueta */
+}

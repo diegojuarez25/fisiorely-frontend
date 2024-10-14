@@ -1,0 +1,84 @@
+<div class="container">
+  <h1 class="title-text">Agenda de Consultas</h1>
+  
+  <!-- Formulario de Consulta -->
+  <form [formGroup]="consultaForm" (ngSubmit)="onSubmit()" class="mb-4 flex-container">
+    <!-- Tipo de Consulta -->
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="w-100 form-field">
+        <mat-label>Tipo de Consulta:</mat-label>
+        <mat-select formControlName="tipoConsulta">
+          <mat-option *ngFor="let tipo of tipoConsultaOptions" [value]="tipo.id">
+            {{ tipo.descripcion }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  
+    <!-- Paciente -->
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="w-100 form-field">
+        <mat-label>Nombre del Paciente:</mat-label>
+        <input matInput [matAutocomplete]="auto" formControlName="pacienteInput">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onPacienteSelected($event.option.value)">
+          <mat-option *ngFor="let paciente of filteredPacientesOptions | async" [value]="paciente">
+            {{ paciente.nombre }} {{ paciente.apellido_paterno }} {{ paciente.apellido_materno }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+  
+    <!-- Padecimiento -->
+    <div class="form-group" *ngIf="showPadecimiento">
+      <mat-form-field appearance="fill" class="w-100 form-field">
+        <mat-label>Padecimiento:</mat-label>
+        <input matInput formControlName="padecimiento">
+      </mat-form-field>
+    </div>
+  
+    <!-- Teléfono -->
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="w-100 form-field">
+        <mat-label>Número Telefónico:</mat-label>
+        <input matInput formControlName="telefono">
+      </mat-form-field>
+    </div>
+  
+    <!-- Edad -->
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="w-100 form-field">
+        <mat-label>Edad:</mat-label>
+        <input matInput formControlName="edad">
+      </mat-form-field>
+    </div>
+  
+    <!-- Modalidad -->
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="w-100 form-field">
+        <mat-label>Modalidad:</mat-label>
+        <mat-select formControlName="modalidad">
+          <mat-option *ngFor="let modalidad of modalidadOptions" [value]="modalidad.id">
+            {{ modalidad.descripcion }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  
+    <!-- Fecha de Inicio -->
+    <div class="form-group">
+      <mat-label>Fecha y Hora de Inicio:</mat-label>
+      <p-calendar formControlName="fechaInicio" [showIcon]="true" [showTime]="true" class="custom-calendar-icon"></p-calendar>
+      <mat-error *ngIf="consultaForm.get('fechaInicio')?.hasError('fechaAnterior')">No puedes seleccionar una fecha anterior a hoy</mat-error>
+    </div>
+  
+    <!-- Botones -->
+    <div class="form-group">
+      <button mat-raised-button type="submit" class="mr-2 button-line" [disabled]="!consultaForm.valid">
+        {{ isEditing ? 'Actualizar Consulta' : 'Crear Consulta' }}
+      </button>
+      <button mat-raised-button type="button" class="mr-2 button-line" (click)="onCancel()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

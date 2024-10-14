@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda de Consultas</title>
+  <link rel="stylesheet" href="./modulo-agenda.component.css">
+</head>
+<body>
+
+  <div class="container-fluid mt-4">
+    <div class="row mb-4">
+      <div class="col">
+        <app-navigation-bar-agenda></app-navigation-bar-agenda>
+      </div>
+    </div>
+
+    <div class="container">
+      <h1 class="title-text">Agenda de Consultas</h1>
+
+      <!-- Formulario de Consulta -->
+      <form [formGroup]="consultaForm" (ngSubmit)="onSubmit()" class="mb-4">
+        <div class="row">
+          <!-- Tipo de Consulta -->
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="fill" class="w-100 form-field">
+              <mat-label>Tipo de Consulta:</mat-label>
+              <mat-select formControlName="tipoConsulta">
+                <mat-option *ngFor="let tipo of tipoConsultaOptions" [value]="tipo.id">
+                  {{ tipo.descripcion }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- Paciente -->
+          <div class="col-md-6 mb-3 d-flex align-items-center">
+            <mat-form-field appearance="fill" class="w-100 form-field">
+              <mat-label>Nombre del Paciente:</mat-label>
+              <input matInput [matAutocomplete]="auto" formControlName="pacienteInput">
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onPacienteSelected($event.option.value)">
+                <mat-option *ngFor="let paciente of filteredPacientesOptions | async" [value]="paciente">
+                  {{ paciente.nombre }} {{ paciente.apellido_paterno }} {{ paciente.apellido_materno }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <button mat-button matSuffix (click)="abrirDialogoNuevoPaciente()" class="ml-2">
+              <mat-icon>person_add</mat-icon>
+            </button>
+          </div>
+              <!-- Padecimiento (mostrado si es tipo de consulta específico) -->
+          <div class="col-md-6 mb-3" *ngIf="showPadecimiento">
+            <mat-form-field appearance="fill" class="w-100 form-field">
+              <mat-label>Padecimiento:</mat-label>
+              <input matInput formControlName="padecimiento">
+            </mat-form-field>
+          </div>
+
+          <!-- Teléfono -->
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="fill" class="w-100 form-field">
+              <mat-label>Número Telefónico:</mat-label>
+              <input matInput formControlName="telefono">
+            </mat-form-field>
+          </div>
+
+          <!-- Edad -->
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="fill" class="w-100 form-field">
+              <mat-label>Edad:</mat-label>
+              <input matInput formControlName="edad">
+            </mat-form-field>
+          </div>
+
+          <!-- Modalidad -->
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="fill" class="w-100 form-field">
+              <mat-label>Modalidad:</mat-label>
+              <mat-select formControlName="modalidad">
+                <mat-option *ngFor="let modalidad of modalidadOptions" [value]="modalidad.id">
+                  {{ modalidad.descripcion }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+    
+          <!-- Fecha de Inicio -->
+          <div class="col-md-6 mb-3">
+              <mat-label>Fecha y Hora de Inicio:</mat-label>
+              <p-calendar formControlName="fechaInicio" [showIcon]="true" [showTime]="true" class="custom-calendar-icon"></p-calendar>
+              <mat-error *ngIf="consultaForm.get('fechaInicio')?.hasError('fechaAnterior')">No puedes seleccionar una fecha anterior a hoy</mat-error>
+          </div>
+        </div>
+ <!-- Botón de Submit -->
+ <div class="row">
+  <div class="col-md-6 mb-3">
+    <button mat-raised-button type="submit" class="mr-2 button-line" [disabled]="!consultaForm.valid">
+      {{ isEditing ? 'Actualizar Consulta' : 'Crear Consulta' }}
+    </button>
+    <!-- Botón de Cancelar -->
+    <button mat-raised-button type="button" class="mr-2 button-line" (click)="onCancel()">
+      Cancelar
+    </button>
+  </div>
+</div>
+</form>
+
+      <hr class="separator-line">
+
+      <!-- Overview del número de consultas -->
+      <div class="overview mb-4">
+        <h4>Número total de consultas: {{ consultas.length }}</h4>
+      </div>
+      <div class="title-bar">Consultas Creadas</div>
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <button class="page-link" (click)="changePage(currentPage - 1)" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </button>
+          </li>
+          <li class="page-item" *ngFor="let page of getDynamicPageRange()" [class.active]="currentPage === page">
+            <button class="page-link" (click)="changePage(page)">{{ page }}</button>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <button class="page-link" (click)="changePage(currentPage + 1)" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+      
+
+      <!-- Lista de Consultas -->
+
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-12 mb-3" *ngFor="let consulta of paginatedConsultas">
+          <div class="user-card">
+            <h5 class="card-title">{{ consulta.paciente.nombre }} {{ consulta.paciente.apellido_paterno }} {{ consulta.paciente.apellido_materno }}</h5>
+            <div class="user-info">
+              <mat-icon>people</mat-icon>
+              <p class="card-text"><strong>Tipo Consulta:</strong> {{ consulta.tipo_consulta }}</p>
+            </div>
+            <div class="user-info" *ngIf="consulta.tipo_consulta === 'Fisioterapia'">
+              <mat-icon>favorite</mat-icon>
+              <p class="card-text"><strong>Padecimiento:</strong> {{ consulta.padecimiento }}</p>
+            </div>
+            <div class="user-info">
+              <mat-icon>phone</mat-icon>
+              <p class="card-text"><strong>Teléfono:</strong> {{ consulta.telefono }}</p>
+            </div>
+            <div class="user-info">
+              <mat-icon>location_on</mat-icon>
+              <p class="card-text"><strong>Edad:</strong> {{ consulta.edad }}</p>
+            </div>
+            <div class="user-info">
+              <mat-icon>show_chart</mat-icon>
+              <p class="card-text"><strong>Modalidad:</strong> {{ consulta.modalidad }}</p>
+            </div>
+            
+          
+            <div class="user-info">
+              <mat-icon>event</mat-icon>
+              <span class="info"><strong>Fecha de Inicio:</strong> {{ consulta.fecha_inicio | date:'dd/MM/yyyy HH:mm' }}</span>
+            </div>
+            <mat-card-actions class="user-actions">
+              <button mat-button color="primary" (click)="onEdit(consulta.id)">
+                <mat-icon>edit</mat-icon>
+                Editar
+              </button>
+              <button mat-button color="warn" (click)="onDelete(consulta.id)">
+                <mat-icon>delete</mat-icon>
+                Eliminar
+              </button>
+            </mat-card-actions>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer"></footer>
+  </div>
+</body>
+</html>

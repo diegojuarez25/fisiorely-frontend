@@ -1,0 +1,70 @@
+/* Asegúrate de que todas las reglas @import estén al principio del archivo */
+
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+/* Otros estilos globales */
+html, body { 
+  height: 100%; 
+}
+
+body { 
+  margin: 0; 
+  font-family: 'Inter', sans-serif; 
+}
+
+/* Animaciones para botones */
+@keyframes button-hover {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.nav-button:hover {
+  animation: button-hover 0.3s ease-in-out;
+}
+
+/* Animaciones para la imagen */
+@keyframes image-fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.illustration {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  animation: image-fade-in 4s ease-in-out;
+}
+
+/* Animaciones para el título */
+@keyframes title-slide-in {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.title {
+  font-family: balquis;
+  font-size: 90px;
+  color: #6a1b9a;
+  margin: 15px 0;
+  animation: title-slide-in 3s ease-in-out;
+}
+
+/* Otras reglas CSS personalizadas pueden ir aquí */

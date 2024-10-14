@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reporte de Ingresos</title>
+  <link rel="stylesheet" href="modulo-ingresos-reportes.component.css">
+</head>
+<body>
+  <div>
+    <app-navigation-bar-administrador></app-navigation-bar-administrador>
+  </div>
+  <div class="container mt-5">
+    <h1 class="text-center mb-4 title-text">Reporte de Ingresos</h1>
+
+    <div class="filtros-container mb-4">
+      <!-- Filtro de Fecha de Inicio -->
+      <mat-form-field appearance="fill" class="filter-item">
+        <mat-label>Fecha Inicio</mat-label>
+        <input matInput [matDatepicker]="pickerInicio" (dateChange)="onFechaInicioChange($event)" placeholder="Seleccionar fecha inicio">
+        <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+        <mat-datepicker #pickerInicio></mat-datepicker>
+      </mat-form-field>
+
+      <!-- Filtro de Fecha de Fin -->
+      <mat-form-field appearance="fill" class="filter-item">
+        <mat-label>Fecha Fin</mat-label>
+        <input matInput [matDatepicker]="pickerFin" (dateChange)="onFechaFinChange($event)" placeholder="Seleccionar fecha fin">
+        <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+        <mat-datepicker #pickerFin></mat-datepicker>
+      </mat-form-field>
+
+      <!-- Filtro de Modalidad -->
+      <mat-form-field appearance="fill" class="filter-item">
+        <mat-label>Modalidad</mat-label>
+        <mat-select (selectionChange)="onModalidadChange($event.value)">
+          <mat-option value="">Todas</mat-option>
+          <mat-option *ngFor="let modalidad of modalidades" [value]="modalidad.id">
+            {{ modalidad.descripcion }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Filtro de Forma de Pago -->
+      <mat-form-field appearance="fill" class="filter-item">
+        <mat-label>Forma de Pago</mat-label>
+        <mat-select (selectionChange)="onFormaPagoChange($event.value)">
+          <mat-option value="">Todas</mat-option>
+          <mat-option *ngFor="let formaPago of formasPago" [value]="formaPago.id">
+            {{ formaPago.descripcion }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Filtro de Tipo de Ingreso -->
+      <mat-form-field appearance="fill" class="filter-item">
+        <mat-label>Tipo de Ingreso</mat-label>
+        <mat-select (selectionChange)="onTipoIngresoChange($event.value)">
+          <mat-option value="">Todos</mat-option>
+          <mat-option *ngFor="let tipoIngreso of tiposIngreso" [value]="tipoIngreso.id">
+            {{ tipoIngreso.descripcion }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="mt-4 text-left">
+      <strong>Total:</strong> {{ totalIngresosFiltrados | currency }}
+    </div>
+
+    <div class="mt-2 mb-4">
+      <button mat-raised-button color="primary" (click)="exportarIngresosExcel()" [disabled]="!hasIngresosFiltrados">
+        Exportar a Excel
+      </button>
+    </div>
+
+    <div *ngIf="hasIngresosFiltrados; else noIngresos">
+      <table mat-table [dataSource]="filteredIngresos" class="mat-elevation-z8">
+        <!-- Definición de columnas -->
+        <ng-container matColumnDef="tipo_ingreso">
+          <th mat-header-cell *matHeaderCellDef> Tipo de Ingreso </th>
+          <td mat-cell *matCellDef="let ingreso"> {{ ingreso.tipo_ingreso.descripcion }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fecha">
+          <th mat-header-cell *matHeaderCellDef> Fecha </th>
+          <td mat-cell *matCellDef="let ingreso"> {{ ingreso.fecha }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="modalidad">
+          <th mat-header-cell *matHeaderCellDef> Modalidad </th>
+          <td mat-cell *matCellDef="let ingreso"> {{ ingreso.modalidad.descripcion }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="forma_pago">
+          <th mat-header-cell *matHeaderCellDef> Forma de Pago </th>
+          <td mat-cell *matCellDef="let ingreso"> {{ ingreso.forma_pago.descripcion }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="monto">
+          <th mat-header-cell *matHeaderCellDef> Monto </th>
+          <td mat-cell *matCellDef="let ingreso"> {{ ingreso.monto | currency }} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+
+    <ng-template #noIngresos>
+      <p>No hay ingresos que mostrar. Por favor, ajusta los filtros.</p>
+    </ng-template>
+  </div>
+</body>
+</html>

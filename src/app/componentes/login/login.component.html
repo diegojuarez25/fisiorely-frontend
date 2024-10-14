@@ -1,0 +1,31 @@
+<div class="login-container">
+  <mat-card class="login-form" [@fadeInOut]>
+    <img src="../../../assets/Almarely Camacho.png" alt="Primum Wellness Center" class="logo">
+    <mat-card-title>ADMIN LOGIN</mat-card-title>
+    <mat-card-subtitle>Sign in to start your session</mat-card-subtitle>
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <mat-form-field appearance="outline">
+          <mat-label>Correo electrónico</mat-label>
+          <input matInput formControlName="email" type="email">
+          <mat-icon matSuffix class="input-icon">email</mat-icon>
+          <mat-error *ngIf="loginForm.get('email')?.hasError('required')">El correo electrónico es obligatorio.</mat-error>
+          <mat-error *ngIf="loginForm.get('email')?.hasError('email')">El correo electrónico no es válido.</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input matInput formControlName="password" type="password">
+          <mat-icon matSuffix class="input-icon">lock</mat-icon>
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">La contraseña es obligatoria.</mat-error>
+        </mat-form-field>
+        
+
+        <div class="button-container">
+          <button mat-flat-button color="primary" type="submit" [disabled]="!loginForm.valid">
+            <mat-icon class="login-icon">login</mat-icon>
+            <span>INICIAR SESIÓN</span>
+          </button>
+          <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+        </div>
+        

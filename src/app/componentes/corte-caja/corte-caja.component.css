@@ -1,0 +1,179 @@
+/* Contenedor principal */
+.corte-caja-container {
+  max-width: 1000px;
+  margin: auto;
+  background-color: #ffffff; /* Fondo blanco */
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.corte-caja-container:hover {
+  transform: translateY(-5px); /* Levanta el contenedor al pasar el ratón */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Sombra más intensa */
+}
+/* Estilo del título */
+.corte-caja-title {
+  font-size: 38px; /* Tamaño de fuente grande */
+  font-weight: 800; /* Negrita más pronunciada */
+  color: #008c9e; /* Color del texto más profundo */
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 3px; /* Espaciado más amplio */
+  background: linear-gradient(to right, #00bed1, #008c9e); /* Degradado con colores más oscuros */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; 
+  padding: 12px 24px; /* Espaciado interno */
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); 
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.corte-caja-title:hover {
+  transform: translateY(-7px); /* Elevación del título */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra al pasar el ratón */
+}
+
+/* Campos de formulario */
+.corte-caja-field {
+  background-color: #ffffff; /* Fondo gris claro */
+  border-radius: 7px; /* Bordes más redondeados */
+  margin-bottom: 24px;
+  box-shadow: inset 0 3px 6px rgba(28, 28, 28, 0.07); /* Sombra interior más pronunciada */
+  transition: border-color 0.3s;
+}
+
+.corte-caja-field:focus-within {
+  border-color: #00bed1; /* Cambio de color al enfocarse */
+}
+
+/* Línea separadora */
+.corte-caja-separator {
+  border-top: 1px solid #00bed1; /* Línea superior */
+  margin: 40px 0; /* Margen vertical más amplio */
+}
+
+/* Tarjetas de información */
+.corte-caja-card {
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12); /* Sombra más intensa */
+  border-radius: 14px;
+  overflow: hidden; 
+  padding: 24px;
+  background-color: #ffffff;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.corte-caja-card:hover {
+  transform: translateY(-8px); /* Desplazamiento más notable */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); 
+}
+
+/* Información del usuario */
+.corte-caja-user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 14px; 
+}
+
+.corte-caja-user-info i {
+  margin-right: 14px; /* Margen más amplio */
+  color: #00bed1; 
+}
+
+.corte-caja-user-info .name {
+  font-size: 20px; /* Tamaño de fuente más grande */
+  font-weight: bold;
+  color: #0f0f0f; 
+}
+
+.corte-caja-user-info .info {
+  font-size: 16px; /* Tamaño de fuente */
+  color: #505050; /* Color gris más oscuro */
+}
+
+/* Botones */
+.corte-caja-button {
+  background-color: #00bed1; 
+  border: none; /* Sin borde */
+  color: #ffffff;
+  padding: 12px 28px;
+  border-radius: 12px; /* Bordes más redondeados */
+  transition: background-color 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.corte-caja-button:hover {
+  background-color: #008c9e; /* Fondo más oscuro al pasar el ratón */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+/* Footer */
+.corte-caja-footer {
+  background-color: #00bed1; /* Color de fondo */
+  height: 70px; /* Ajusta la altura según sea necesario */
+  width: 100%; /* Abarca todo el ancho de la página */
+  position: fixed; /* Fija el pie de página en la parte inferior */
+  bottom: 0; /* Alinea el pie de página en la parte inferior */
+  left: 0; /* Alinea el pie de página en la parte izquierda */
+  z-index: 1000; /* Valor alto para asegurar que esté por encima de otros elementos */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff; /* Color del texto */
+  font-size: 18px; /* Tamaño de fuente */
+}
+
+/* Estilo especial para destacar secciones */
+.corte-caja-highlight {
+  background-color: #8A78B1; /* Color de fondo especial */
+  color: white; /* Color del texto */
+  padding: 14px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  text-align: center; /* Centrar texto */
+  margin-bottom: 24px;
+}
+/* Botón Eliminar */
+.corte-caja-button-eliminar {
+  background-color: #dc3545; /* Fondo rojo */
+  border: none; /* Sin borde */
+  color: #ffffff;
+  padding: 6px 28px;
+  border-radius: 12px; /* Bordes más redondeados */
+  transition: background-color 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.corte-caja-button-eliminar:hover {
+  background-color: #c82333; /* Rojo más oscuro al pasar el ratón */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+/* Botón Detalles Ingresos */
+.corte-caja-button-detalles-ingresos {
+  background-color: #28a745; /* Fondo verde */
+  border: none; /* Sin borde */
+  color: #ffffff;
+  padding: 12px 18px;
+  border-radius: 12px; /* Bordes más redondeados */
+  transition: background-color 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.corte-caja-button-detalles-ingresos:hover {
+  background-color: #349c46; /* Verde más oscuro al pasar el ratón */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+/* Botón Detalles Gastos */
+.corte-caja-button-detalles-gastos {
+  background-color: #055bdb; /* Fondo amarillo */
+  border: none; /* Sin borde */
+  color: #ffffff;
+  padding: 12px 30px;
+  border-radius: 12px; /* Bordes más redondeados */
+  transition: background-color 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
